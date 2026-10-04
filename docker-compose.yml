@@ -17,6 +17,7 @@ services:
     environment:
       DATABASE_URL: postgres://seat:seat@db:5432/seat?sslmode=disable
       PORT: "8080"
+      ADMIN_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJuYW1lIjoicGFydGggYmhhcnNhZGlhIn0.Ln7wd5Qjwf_2Y9Ps4YNJqYcaJa81rCs1EImUpeWon7Y
     ports: ["8080:8080"]
     depends_on:
       db:

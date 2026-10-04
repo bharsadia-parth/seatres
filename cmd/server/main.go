@@ -27,6 +27,12 @@ func main() {
 		port = "8080"
 	}
 
+	adminToken := os.Getenv("ADMIN_TOKEN")
+	if adminToken == "" {
+		slog.Error("ADMIN_TOKEN is required")
+		os.Exit(1)
+	}
+
 	// ctx is cancelled when we receive Ctrl+C or SIGTERM (what Docker/Render sends).
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
@@ -46,7 +52,7 @@ func main() {
 
 	srv := &http.Server{
 		Addr:              ":" + port,
-		Handler:           api.NewRouter(st),
+		Handler:           api.NewRouter(st, adminToken),
 		ReadHeaderTimeout: 5 * time.Second,
 	}
 
